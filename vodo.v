@@ -37,5 +37,8 @@ fn add(args []string) {
 			s = s + ' '
 		}
 	}
-	f.writeln(s)
+	task := Task{
+		text: s
+	}
+	f.writeln(task.as_string())
 }
