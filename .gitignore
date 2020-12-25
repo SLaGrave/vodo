@@ -1,0 +1,5 @@
+# ignore the built file
+vodo
+
+# ignore the testing todo.txt
+todo.txt
