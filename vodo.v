@@ -14,7 +14,7 @@ fn main() {
 		// Add a task
 		'add' { add(args) }
 		// List tasks
-		// 'ls', 'list' { ls(args) }
+		'ls', 'list' { ls(args) }
 		else { println('Unexpected arguments') }
 	}
 }
@@ -26,19 +26,19 @@ fn add(args []string) {
 	defer { // Will close at end of command
 		f.close()
 	}
-	// Get the task string
-	// The 0th arg is the filename
-	// The 1st arg is the 'add' command
-	// The task text is all other args
-	mut s := ''
-	for i in 2 .. args.len {
-		s = s + args[i]
-		if i != args.len - 1 {
-			s = s + ' '
-		}
-	}
+
 	task := Task{
-		text: s
+		text: args[2]
 	}
 	f.writeln(task.as_string())
+	println("TODO: '$task.as_string()' added on line [N]")
+}
+
+// List tasks
+fn ls(args []string) {
+	// Get the tasks
+	tasks := os.read_lines('./todo.txt') or { panic(err) }
+	for i, task in tasks {
+		println('${i+1:02} $task')
+	}
 }
